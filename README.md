@@ -1,1 +1,1 @@
-This is a Game made using java .
+This Repository contains all the Projects using Java.
