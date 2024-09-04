@@ -9,6 +9,7 @@ public class Rental {
     private Car car;
     private Customer customer;
     private int days;
+    private String rentalId; 
 
     public Rental(Car car, Customer customer, int days) {
         this.car = car;
@@ -16,21 +17,25 @@ public class Rental {
         this.days = days;
     }
 
-    public static Rental rentCar(Car car, Customer customer, int days) throws SQLException {
+public static void rentCar(Car car, Customer customer, int days) throws SQLException {
+    if (car.isAvailable()) {
+        car.updateAvailability(false); 
         Connection connection = DatabaseConnection.getConnection();
-        String query = "INSERT INTO rentals (car_id, customer_id, days) VALUES (?, ?, ?)";
+        String query = "INSERT INTO rentals (car_id, customer_id, days, rental_date) VALUES (?, ?, ?, CURRENT_DATE)";
         PreparedStatement statement = connection.prepareStatement(query);
         statement.setString(1, car.getCarId());
         statement.setString(2, customer.getCustomerId());
         statement.setInt(3, days);
         statement.executeUpdate();
-        return new Rental(car, customer, days);
+        
+        System.out.println("Car rented successfully!");
+    } else {
+        System.out.println("Car is not available for rent.");
     }
-    
-
+}    
     public static Rental getRentalByCarId(String carId) throws SQLException {
         Connection connection = DatabaseConnection.getConnection();
-        String query = "SELECT * FROM rentals WHERE car_id = ?";
+        String query = "SELECT * FROM rentals WHERE car_id = ? AND return_date IS NULL";
         PreparedStatement statement = connection.prepareStatement(query);
         statement.setString(1, carId);
         ResultSet resultSet = statement.executeQuery();
@@ -44,7 +49,7 @@ public class Rental {
         }
         return null;
     }
-    
+
     public Car getCar() {
         return car;
     }
@@ -55,5 +60,13 @@ public class Rental {
 
     public int getDays() {
         return days;
+    }
+
+    public String getRentalId() {
+        return rentalId;
+    }
+
+    public void setRentalId(String rentalId) {
+        this.rentalId = rentalId;
     }
 }
