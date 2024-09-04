@@ -14,16 +14,18 @@ public class Main {
             System.out.println("1. View available cars");
             System.out.println("2. Rent a car");
             System.out.println("3. Return a car");
-            System.out.println("4. Exit");
-            System.out.print("Enter Your Choice : ");
+            System.out.println("4. View rental history");
+            System.out.println("5. Exit");
+            System.out.print("Enter Your Choice: ");
 
             int choice;
             try {
                 choice = Integer.parseInt(scanner.nextLine().trim());
             } catch (NumberFormatException e) {
-                System.out.println("Invalid choice. Please enter a number between 1 and 4.");
+                System.out.println("Invalid choice. Please enter a number between 1 and 6.");
                 continue;
             }
+
             try {
                 switch (choice) {
                     case 1:
@@ -41,7 +43,7 @@ public class Main {
                     case 2:
                         System.out.println("Enter Car ID to rent:");
                         String carId = scanner.nextLine();
-                        Car car = system.getCarById(carId);
+                        Car car = Car.getCarById(carId);
                         if (car != null && car.isAvailable()) {
                             System.out.println("Enter your name:");
                             String name = scanner.nextLine();
@@ -51,7 +53,7 @@ public class Main {
                             int days;
                             try {
                                 days = Integer.parseInt(scanner.nextLine().trim());
-                                
+
                                 // Calculate rental cost
                                 double rentalCost = car.calculatePrice(days);
                                 System.out.println("The total rental cost for " + days + " days is: $" + rentalCost);
@@ -60,7 +62,6 @@ public class Main {
                                 String confirmation = scanner.nextLine().trim().toLowerCase();
                                 if (confirmation.equals("y")) {
                                     system.rentCar(car, customer, days);
-                                    System.out.println("Car rented successfully!");
                                 } else {
                                     System.out.println("Rental cancelled.");
                                 }
@@ -75,16 +76,21 @@ public class Main {
                     case 3:
                         System.out.println("Enter Car ID to return:");
                         carId = scanner.nextLine();
-                        car = system.getCarById(carId);
+                        car = Car.getCarById(carId);
                         if (car != null && !car.isAvailable()) {
                             system.returnCar(car);
-                            System.out.println("Car returned successfully!");
                         } else {
                             System.out.println("Car was not rented or is already available.");
                         }
                         break;
 
                     case 4:
+                        System.out.println("Enter Customer Name to view rental history:");
+                        String customerName = scanner.nextLine();
+                        system.viewRentalHistoryByCustomerName(customerName);
+                        break;
+
+                    case 5:
                         System.out.println("Exiting...");
                         scanner.close();
                         return;
