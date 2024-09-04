@@ -1,1 +1,1 @@
-This Repository contains all the Projects using Java.
+This Repository contains all the Projects made using Java.
