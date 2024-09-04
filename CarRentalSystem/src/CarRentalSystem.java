@@ -8,7 +8,6 @@ import java.sql.ResultSet;
 
 public class CarRentalSystem {
 
-    // Method to get available cars
     public List<Car> getAvailableCars() throws SQLException {
         List<Car> availableCars = new ArrayList<>();
         Connection connection = DatabaseConnection.getConnection();
