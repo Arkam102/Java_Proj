@@ -1,0 +1,23 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "src.Main",
+            "projectName": "CarRentalSystem_d0ec0e4b"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "src.Main",
+            "projectName": "car_rental_system",
+            "classPaths": [
+                "lib/mysql-connector-j-9.0.0.jar",
+                "bin"
+            ]
+        }
+    ]
+}
