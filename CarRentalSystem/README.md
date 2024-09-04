@@ -4,7 +4,7 @@ Welcome to the Car Rental System project! This Java application is designed to h
 
 Project Structure --
 
-The project is organized into several directories. The src/ folder contains all the Java source code files. The src/ folder includes .jar file for setting up the database. You’ll also find a video/folder showing the overall working of the project through a video.
+The project is organized into several directories. The src/ folder contains all the Java source code files. The src/ folder includes .jar file for setting up the database.
 
 Features --
 
