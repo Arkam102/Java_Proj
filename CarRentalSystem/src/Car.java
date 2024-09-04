@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+// Car class representing car details.
 public class Car {
     private String carId;
     private String brand;
@@ -12,7 +13,7 @@ public class Car {
     private double basePricePerDay;
     private boolean isAvailable;
 
-    // Constructor
+    // Constructor to initialize car details.
     public Car(String carId, String brand, String model, double basePricePerDay, boolean isAvailable) {
         this.carId = carId;
         this.brand = brand;
@@ -20,7 +21,6 @@ public class Car {
         this.basePricePerDay = basePricePerDay;
         this.isAvailable = isAvailable;
     }
-
     public static Car getCarById(String carId) throws SQLException {
         Connection connection = DatabaseConnection.getConnection();
         String query = "SELECT * FROM cars WHERE car_id = ?";
@@ -37,7 +37,6 @@ public class Car {
         }
         return null;
     }
-
     public void updateAvailability(boolean available) throws SQLException {
         Connection connection = DatabaseConnection.getConnection();
         String query = "UPDATE cars SET is_available = ? WHERE car_id = ?";
@@ -46,7 +45,6 @@ public class Car {
         statement.setString(2, this.carId);
         statement.executeUpdate();
     }
-
     public String getCarId() {
         return carId;
     }
