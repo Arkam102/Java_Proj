@@ -17,27 +17,27 @@ public class Customer {
     public static Customer addCustomer(String name) throws SQLException {
         Connection connection = DatabaseConnection.getConnection();
         String query = "INSERT INTO customers (customer_id, name) VALUES (?, ?)";
-        String customerId = "CUS" + String.format("%04d", (int)(Math.random() * 10000));
+        String customerId = "CUS" + String.format("%04d", (int) (Math.random() * 10000));
         PreparedStatement statement = connection.prepareStatement(query);
         statement.setString(1, customerId);
         statement.setString(2, name);
         statement.executeUpdate();
         return new Customer(customerId, name);
     }
-    
+
     public static Customer getCustomerById(String customerId) throws SQLException {
         Connection connection = DatabaseConnection.getConnection();
         String query = "SELECT * FROM customers WHERE customer_id = ?";
         PreparedStatement statement = connection.prepareStatement(query);
         statement.setString(1, customerId);
         ResultSet resultSet = statement.executeQuery();
-    
+
         if (resultSet.next()) {
             String name = resultSet.getString("name");
             return new Customer(customerId, name);
         }
         return null;
-    }    
+    }
 
     public String getCustomerId() {
         return customerId;
