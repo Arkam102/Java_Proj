@@ -14,18 +14,10 @@ public class Main {
             System.out.println("1. View available cars");
             System.out.println("2. Rent a car");
             System.out.println("3. Return a car");
-            System.out.println("4. View rental history");
-            System.out.println("5. Exit");
+            System.out.println("4. Exit");
             System.out.print("Enter Your Choice: ");
 
-            int choice;
-            try {
-                choice = Integer.parseInt(scanner.nextLine().trim());
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid choice. Please enter a number between 1 and 6.");
-                continue;
-            }
-
+            int choice = Integer.parseInt(scanner.nextLine().trim());
             try {
                 switch (choice) {
                     case 1:
@@ -83,18 +75,10 @@ public class Main {
                             System.out.println("Car was not rented or is already available.");
                         }
                         break;
-
                     case 4:
-                        System.out.println("Enter Customer Name to view rental history:");
-                        String customerName = scanner.nextLine();
-                        system.viewRentalHistoryByCustomerName(customerName);
-                        break;
-
-                    case 5:
                         System.out.println("Exiting...");
                         scanner.close();
                         return;
-
                     default:
                         System.out.println("Invalid choice. Please try again.");
                         break;
